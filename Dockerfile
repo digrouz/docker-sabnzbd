@@ -19,6 +19,7 @@ RUN apk --no-cache upgrade && \
       py2-pip \
       libressl-dev \
       musl-dev \
+      wget \
       libffi-dev && \
     apk add --no-cache --virtual=run-deps \
       ca-certificates \
