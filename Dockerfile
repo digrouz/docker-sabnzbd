@@ -37,6 +37,7 @@ RUN apk --no-cache upgrade && \
     mkdir /opt && \
     unzip /tmp/sabnzbd.zip -d /opt/ && \
     mv /opt/sabnzbd-master /opt/sabnzbd && \
+    ln -s /config /opt/sabnzbd/.sabnzbd && \
     git clone --depth 1 https://github.com/Parchive/par2cmdline.git /tmp/par2cmdline && \
     cd /tmp/par2cmdline && \
     aclocal && \
@@ -64,6 +65,6 @@ EXPOSE 8080 9090
 #USER sabnzbd
 
 ### Start Sabnzbd
-#COPY ./docker-entrypoint.sh /
-#ENTRYPOINT ["/docker-entrypoint.sh"]
-#CMD ["sabnzbd"]
+COPY ./docker-entrypoint.sh /
+ENTRYPOINT ["/docker-entrypoint.sh"]
+CMD ["sabnzbd"]
