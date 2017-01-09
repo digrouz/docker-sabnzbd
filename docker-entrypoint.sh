@@ -49,7 +49,7 @@ ConfigureUser
 if [ "$1" = 'sabnzbd' ]; then
     /bin/chown -R "${MYUSER}":"${MYUSER}" /config /opt/sabnzbd
     /bin/chmod -R g+w /config /opt/sabnzbd
-    exec /sbin/su-exec "${MYUSER}" /usr/bin/python /opt/sabnzbd/SABnzbd.py -s 0.0.0.0:8080 --nolaunch --config-file=/config/config.ini "$@"
+    exec /sbin/su-exec "${MYUSER}" /usr/bin/python /opt/sabnzbd/SABnzbd.py -s 0.0.0.0:8080 "$@"
 fi
 
 exec "$@"
