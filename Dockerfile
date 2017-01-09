@@ -17,7 +17,6 @@ RUN apk --no-cache upgrade && \
       g++ \
       python-dev \
       py2-pip \
-      wget \
       libressl-dev \
       musl-dev \
       libffi-dev && \
@@ -34,6 +33,7 @@ RUN apk --no-cache upgrade && \
     pip --no-cache-dir install --upgrade pyopenssl cheetah requirements && \
     pip --no-cache-dir install http://www.golug.it/pub/yenc/yenc-0.4.0.tar.gz && \
     wget --no-check-certificate https://github.com/sabnzbd/sabnzbd/archive/master.zip -O /tmp/sabnzbd.zip && \
+    mkdir /opt && \
     unzip /tmp/sabnzbd.zip -d /opt/ && \
     mv /opt/sabnzbd-master /opt/sabnzbd && \
     git clone --depth 1 https://github.com/Parchive/par2cmdline.git /tmp/par2cmdline && \
