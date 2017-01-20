@@ -28,6 +28,7 @@ RUN apk --no-cache upgrade && \
       py-lxml \
       unrar  \
       p7zip \
+      libressl \
       su-exec \
       git && \
     pip --no-cache-dir install --upgrade setuptools && \
