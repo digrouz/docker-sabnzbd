@@ -36,6 +36,7 @@ RUN apk --no-cache upgrade && \
     pip --no-cache-dir install --upgrade setuptools && \
     pip --no-cache-dir install --upgrade pyopenssl cheetah requirements && \
     pip --no-cache-dir install http://www.golug.it/pub/yenc/yenc-0.4.0.tar.gz && \
+    pip --no-cache-dir install --upgrade sabyenc && \
     wget --no-check-certificate https://github.com/sabnzbd/sabnzbd/archive/master.zip -O /tmp/sabnzbd.zip && \
     mkdir /opt && \
     unzip /tmp/sabnzbd.zip -d /opt/ && \
