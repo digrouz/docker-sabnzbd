@@ -41,14 +41,6 @@ RUN apk --no-cache upgrade && \
     unzip /tmp/sabnzbd.zip -d /opt/ && \
     mv /opt/sabnzbd-master /opt/sabnzbd && \
     ln -s /config /opt/sabnzbd/.sabnzbd && \
-    git clone --depth 1 https://github.com/Parchive/par2cmdline.git /tmp/par2cmdline && \
-    cd /tmp/par2cmdline && \
-    aclocal && \
-    automake --add-missing && \
-    autoconf && \
-    ./configure && \
-    make && \
-    make install && \
     git clone https://github.com/jkansanen/par2cmdline-mt.git /tmp/par2cmdline-mt && \
     cd /tmp/par2cmdline-mt && \
     aclocal && \
