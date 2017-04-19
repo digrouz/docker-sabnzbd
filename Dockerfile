@@ -47,8 +47,16 @@ RUN apk --no-cache upgrade && \
     ./configure && \
     make && \
     make install && \
+    git clone https://github.com/jkansanen/par2cmdline-mt.git /tmp/par2cmdline-mt && \
+    cd /tmp/par2cmdline-mt && \
+    aclocal && \
+    automake --add-missing && \
+    autoconf && \
+    ./configure && \ 
+    make && \
+    make install && \
     cd / && \
-    rm -rf /tmp/par2cmdline && \
+    rm -rf /tmp/par2cmdline /tmp/par2cmdline-mt && \
     apk del --no-cache --purge \
       build-deps  && \
     rm -rf /opt/sabnzbd/.git* \
