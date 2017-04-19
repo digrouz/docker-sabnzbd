@@ -20,6 +20,7 @@ RUN apk --no-cache upgrade && \
       libressl-dev \
       musl-dev \
       wget \
+      libgomp-dev \
       libffi-dev && \
     apk add --no-cache --virtual=run-deps \
       ca-certificates \
@@ -27,6 +28,7 @@ RUN apk --no-cache upgrade && \
       py-libxml2 \
       py-lxml \
       unrar  \
+      libgomp \
       p7zip \
       libressl \
       su-exec \
