@@ -5,10 +5,7 @@
 MYUSER="${APPUSER}"
 MYGID="${APPGID}"
 MYUID="${APPUID}"
-OS=""
-MYUPGRADE="0"
 
-DetectOS
 AutoUpgrade
 ConfigureUser
 

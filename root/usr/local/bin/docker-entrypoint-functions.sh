@@ -20,6 +20,8 @@ DetectOS(){
 }
 
 AutoUpgrade(){
+  local OS
+  DetectOS
   if [ "$(id -u)" = '0' ]; then
     if [ -n "${DOCKUPGRADE}" ]; then
       MYUPGRADE="${DOCKUPGRADE}"

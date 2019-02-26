@@ -1,4 +1,4 @@
-FROM alpine:3.8
+FROM alpine:3.9
 LABEL maintainer "DI GREGORIO Nicolas <nicolas.digregorio@gmail.com>"
 
 ### Environment variables
@@ -18,7 +18,6 @@ RUN chmod 1777 /tmp && \
     MYUSER=${APPUSER} && \
     MYUID=${APPUID} && \
     MYGID=${APPGID} && \
-    DetectOS && \
     ConfigureUser && \
     apk --no-cache upgrade && \
     apk add --no-cache --virtual=build-deps \
