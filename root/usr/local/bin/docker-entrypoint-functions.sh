@@ -3,8 +3,6 @@
 MYUSER="dockuser"
 MYGID="100000"
 MYUID="100000"
-OS=""
-MYUPGRADE="0"
 
 DetectOS(){
   if [ -e /etc/alpine-release ]; then
@@ -17,16 +15,18 @@ DetectOS(){
       OS="centos"
     fi
   fi
+  echo $OS
 }
 
 AutoUpgrade(){
-  local OS
-  DetectOS
+  local OS=$(DetectOS)
+  local MYUPGRADE=0
   if [ "$(id -u)" = '0' ]; then
     if [ -n "${DOCKUPGRADE}" ]; then
       MYUPGRADE="${DOCKUPGRADE}"
     fi
     if [ "${MYUPGRADE}" == 1 ]; then
+      DockLog "AutoUpgrade is enabled."
       if [ "${OS}" == "alpine" ]; then
         apk --no-cache upgrade
         rm -rf /var/cache/apk/*
@@ -43,6 +43,8 @@ AutoUpgrade(){
         yum clean all
         rm -rf /var/cache/yum/*
       fi
+    else
+      DockLog "AutoUpgrade is not enabled."
     fi
   fi
 }
@@ -70,8 +72,7 @@ file_env() {
 }
 
 ConfigureUser () {
-  local OS
-  DetectOS
+  local OS=$(DetectOS)
   if [ "$(id -u)" = '0' ]; then
     # Managing user
     if [ -n "${DOCKUID}" ]; then
@@ -153,14 +154,17 @@ ConfigureUser () {
 }
 
 DockLog(){
+  local OS=$(DetectOS)
+  local date=$(date)
   if [ "${OS}" == "centos" ] || [ "${OS}" == "alpine" ]; then
-    echo "${1}"
+    echo "[${date}] ${1}"
   else
-    logger "${1}"
+    logger "[${date}] ${1}"
   fi
 }
 
 RunDropletEntrypoint(){
+  local OS=$(DetectOS)
   if [ $(find /docker-entrypoint.d -name "*.sh" | wc -l) -gt 0 ]; then
     DockLog "Executing all bash scripts from /docker-entrypoint.d"
     for bashdroplet in $(ls -1 /docker-entrypoint.d/*.sh); do
@@ -174,5 +178,20 @@ RunDropletEntrypoint(){
       DockLog "launching ${phpdroplet}"
       php ${phpdroplet}
     done
+  fi
+}
+
+PrepareEnvironment(){
+  local OS=$(DetectOS)
+  if [ -f ${1} ]; then
+    grep -v "#" ${1} |
+    while IFS=\= read -r name value; do
+      if [ -n "${name}" ]; then
+        echo "export ${name}=${value}" >> /etc/profile.d/docker-$(basename ${1}).sh
+      fi
+    done
+    DockLog "Created environment file /etc/profile.d/docker-$(basename ${1}).sh"
+  else
+    DockLog "Given argument is not supported"
   fi
 }

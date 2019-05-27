@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
 
+. /etc/profile
 . /usr/local/bin/docker-entrypoint-functions.sh
 
 MYUSER="${APPUSER}"
