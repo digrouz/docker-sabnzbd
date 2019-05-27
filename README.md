@@ -7,7 +7,7 @@ Install sabnzbd into an Alpine container
 ## Tag
 Several tag are available:
 * latest: see alpine
-* alpine: [Dockerfile_alpine](https://github.com/digrouz/docker-sickchill/blob/master/Dockerfile_alpine)
+* alpine: [Dockerfile_alpine](https://github.com/digrouz/docker-sabnzbd/blob/master/Dockerfile_alpine)
 
 ## Description
 SABnzbd makes Usenet as simple and streamlined as possible by automating everything we can. All you have to do is add an .nzb. SABnzbd takes over from there, where it will be automatically downloaded, verified, repaired, extracted and filed away with zero human interaction.
