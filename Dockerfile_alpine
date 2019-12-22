@@ -48,6 +48,7 @@ RUN chmod 1777 /tmp && \
       ca-certificates \
       python2 \ 
       libxml2 \
+      libxslt \
       unrar  \
       libgomp \
       p7zip \
