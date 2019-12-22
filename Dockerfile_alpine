@@ -34,19 +34,20 @@ RUN chmod 1777 /tmp && \
       autoconf \
       gcc \
       g++ \
-      python-dev \
+      python2-dev \
       py2-pip \
       libressl-dev \
       musl-dev \
       libffi-dev \
       curl \
+      libxml2-dev\
+      libxslt-dev\
     && \
     apk add --no-cache --virtual=run-deps \
       bash \
       ca-certificates \
-      python \ 
-      py-libxml2 \
-      py-lxml \
+      python2 \ 
+      libxml2 \
       unrar  \
       libgomp \
       p7zip \
@@ -55,7 +56,7 @@ RUN chmod 1777 /tmp && \
       git \
     && \
     pip --no-cache-dir install --upgrade setuptools && \
-    pip --no-cache-dir install --upgrade pyopenssl cheetah && \
+    pip --no-cache-dir install --upgrade pyopenssl cheetah liblxml && \
     pip --no-cache-dir install http://www.golug.it/pub/yenc/yenc-0.4.0.tar.gz && \
     pip --no-cache-dir install --upgrade sabyenc && \
     curl -sL https://github.com/sabnzbd/sabnzbd/releases/download/${SABNZBD_VERSION}/SABnzbd-${SABNZBD_VERSION}-src.tar.gz -o /tmp/SABnzbd.tar.gz && \
