@@ -57,7 +57,7 @@ RUN chmod 1777 /tmp && \
       git \
     && \
     pip --no-cache-dir install --upgrade setuptools && \
-    pip --no-cache-dir install --upgrade pyopenssl cheetah liblxml && \
+    pip --no-cache-dir install --upgrade pyopenssl cheetah lxml && \
     pip --no-cache-dir install http://www.golug.it/pub/yenc/yenc-0.4.0.tar.gz && \
     pip --no-cache-dir install --upgrade sabyenc && \
     curl -sL https://github.com/sabnzbd/sabnzbd/releases/download/${SABNZBD_VERSION}/SABnzbd-${SABNZBD_VERSION}-src.tar.gz -o /tmp/SABnzbd.tar.gz && \
