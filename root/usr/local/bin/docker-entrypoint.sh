@@ -18,7 +18,7 @@ if [ "${1}" == 'sabnzbd' ]; then
   RunDropletEntrypoint
 
   DockLog "Starting app: ${1}"
-  exec su-exec "${MYUSER}" python /opt/sabnzbd/SABnzbd.py -s 0.0.0.0:8080 --config-file=/config/sabnzbd.ini
+  exec su-exec "${MYUSER}" python3 /opt/sabnzbd/SABnzbd.py -s 0.0.0.0:8080 --config-file=/config/sabnzbd.ini
 else
   exec "$@"
 fi

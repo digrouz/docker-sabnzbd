@@ -1,8 +1,7 @@
-FROM alpine:3.11
+FROM alpine:3.12
 
-ARG SABNZBD_VERSION="2.3.9"
+ARG SABNZBD_VERSION="3.0.2"
 ARG PAR2CMDLINE_VERSION="v0.8.1"
-ARG YENC_VERSION="0.4.0"
 
 LABEL maintainer "DI GREGORIO Nicolas <nicolas.digregorio@gmail.com>"
 
@@ -14,14 +13,14 @@ ENV LANG='en_US.UTF-8' \
     APPUID='10012' \
     APPGID='10012' \
     SABNZBD_VERSION="${SABNZBD_VERSION}" \
-    PAR2CMDLINE_VERSION="${PAR2CMDLINE_VERSION}" \
-    YENC_VERSION="${YENC_VERSION}"
+    PAR2CMDLINE_VERSION="${PAR2CMDLINE_VERSION}" 
 
 # Copy config files
 COPY root/ /
 
 ### Install Application
-RUN chmod 1777 /tmp && \
+RUN set -x && \
+    chmod 1777 /tmp && \
     . /usr/local/bin/docker-entrypoint-functions.sh && \
     MYUSER=${APPUSER} && \
     MYUID=${APPUID} && \
@@ -34,8 +33,8 @@ RUN chmod 1777 /tmp && \
       autoconf \
       gcc \
       g++ \
-      python2-dev \
-      py2-pip \
+      python3-dev \
+      py3-pip \
       libressl-dev \
       musl-dev \
       libffi-dev \
@@ -46,7 +45,9 @@ RUN chmod 1777 /tmp && \
     apk add --no-cache --virtual=run-deps \
       bash \
       ca-certificates \
-      python2 \ 
+      python3 \ 
+      py3-six \
+      py3-chardet \
       libxml2 \
       libxslt \
       unrar  \
@@ -56,15 +57,14 @@ RUN chmod 1777 /tmp && \
       su-exec \
       git \
     && \
-    pip --no-cache-dir install --upgrade setuptools && \
-    pip --no-cache-dir install --upgrade pyopenssl cheetah lxml && \
-    pip --no-cache-dir install http://www.golug.it/pub/yenc/yenc-${YENC_VERSION}.tar.gz && \
-    pip --no-cache-dir install --upgrade sabyenc && \
+    pip3 --no-cache-dir install --upgrade setuptools && \
     curl -sL https://github.com/sabnzbd/sabnzbd/releases/download/${SABNZBD_VERSION}/SABnzbd-${SABNZBD_VERSION}-src.tar.gz -o /tmp/SABnzbd.tar.gz && \
     tar xzf /tmp/SABnzbd.tar.gz -C /opt && \
     mv /opt/SABnzbd-${SABNZBD_VERSION} /opt/sabnzbd && \
     cd /opt/sabnzbd && \
-    python tools/make_mo.py && \
+    sed -i -e "s/feedparser.*/feedparser<6.0.0/" /opt/sabnzbd/requirements.txt && \  
+    pip3 --no-cache-dir install --upgrade -r /opt/sabnzbd/requirements.txt && \
+    python3 tools/make_mo.py && \
     ln -s /config /opt/sabnzbd/.sabnzbd && \
     git clone --depth 1 --branch ${PAR2CMDLINE_VERSION} https://github.com/Parchive/par2cmdline.git /tmp/par2cmdline-mt && \
     cd /tmp/par2cmdline-mt && \
