@@ -1,6 +1,6 @@
 FROM alpine:3.12
 
-ARG SABNZBD_VERSION="3.0.2"
+ARG SABNZBD_VERSION="3.1.0"
 ARG PAR2CMDLINE_VERSION="v0.8.1"
 
 LABEL maintainer "DI GREGORIO Nicolas <nicolas.digregorio@gmail.com>"
@@ -62,7 +62,6 @@ RUN set -x && \
     tar xzf /tmp/SABnzbd.tar.gz -C /opt && \
     mv /opt/SABnzbd-${SABNZBD_VERSION} /opt/sabnzbd && \
     cd /opt/sabnzbd && \
-    sed -i -e "s/feedparser.*/feedparser<6.0.0/" /opt/sabnzbd/requirements.txt && \  
     pip3 --no-cache-dir install --upgrade -r /opt/sabnzbd/requirements.txt && \
     python3 tools/make_mo.py && \
     ln -s /config /opt/sabnzbd/.sabnzbd && \
