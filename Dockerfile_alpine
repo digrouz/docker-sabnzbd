@@ -1,4 +1,4 @@
-FROM alpine:3.12
+FROM alpine:3.13
 
 ARG SABNZBD_VERSION="3.1.1"
 ARG PAR2CMDLINE_VERSION="v0.8.1"
@@ -35,7 +35,7 @@ RUN set -x && \
       g++ \
       python3-dev \
       py3-pip \
-      libressl-dev \
+      openssl-dev \
       musl-dev \
       libffi-dev \
       curl \
@@ -53,7 +53,7 @@ RUN set -x && \
       unrar  \
       libgomp \
       p7zip \
-      libressl \
+      openssl \
       su-exec \
       git \
     && \
