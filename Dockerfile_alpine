@@ -39,6 +39,7 @@ RUN set -x && \
       musl-dev \
       libffi-dev \
       curl \
+      cargo \
       libxml2-dev\
       libxslt-dev\
     && \
