@@ -84,7 +84,9 @@ RUN set -x && \
     rm -rf /opt/sabnzbd/.git* \
            /tmp/* \
            /var/cache/apk/*  \
-           /var/tmp/*
+           /var/tmp/* \
+           ${HOME}/.cache \
+	       ${HOME}/.cargo
 
 ### Volume
 VOLUME ["/downloads","/config","/incomplete-downloads"]
