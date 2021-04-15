@@ -23,4 +23,7 @@ jobs:
         run: |
           echo "Run update.sh"
           .github/scripts/update.sh
-         
+      - name: run update-par2cmdline.sh
+        run: |
+          echo "Run update-par2cmdline.sh"
+          .github/scripts/update-par2cmdline.sh
