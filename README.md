@@ -1,3 +1,5 @@
+[![auto-update-workflow](https://github.com/digrouz/docker-sabnzbd/actions/workflows/auto-update.yml/badge.svg)](https://github.com/digrouz/docker-sabnzbd/actions/workflows/auto-update.yml)
+
 # docker-alp-sabnzbd
 
 Install sabnzbd into an Alpine container
@@ -24,7 +26,7 @@ http://sabnzbd.org/
         -e DOCKUID=<UID default:10012> \
         -e DOCKGID=<GID default:10012> \
         -p 8080:8080 \
-        -p 9090:9090   digrouz/docker-alp-sabnzbd
+        -p 9090:9090   digrouz/docker-sabnzbd
         
 ## Environment Variables
 
