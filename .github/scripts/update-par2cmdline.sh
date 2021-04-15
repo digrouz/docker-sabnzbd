@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PAR2_URL="https://api.github.com/repos/sabnzbd/sabnzbd/tags"
+PAR2_URL="https://api.github.com/repos/Parchive/par2cmdline/tags"
 
 
 LAST_VERSION=$(curl -SsL ${PAR2_URL} | jq .[0].name -r )
