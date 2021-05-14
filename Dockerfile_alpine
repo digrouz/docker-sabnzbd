@@ -1,6 +1,6 @@
 FROM alpine:3.13
 
-ARG SABNZBD_VERSION='3.3.0Beta4'
+ARG SABNZBD_VERSION='3.3.0RC1'
 ARG PAR2CMDLINE_VERSION='v0.8.1'
 
 LABEL maintainer "DI GREGORIO Nicolas <nicolas.digregorio@gmail.com>"
