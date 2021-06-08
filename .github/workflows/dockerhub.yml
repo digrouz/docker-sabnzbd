@@ -32,7 +32,7 @@ jobs:
           context: .
           file: Dockerfile_alpine
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_APPNAME }}:latest
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/sabnzbd:latest
       -
         name: Build and push tag alpine
         uses: docker/build-push-action@v2
@@ -40,4 +40,4 @@ jobs:
           context: .
           file: Dockerfile_alpine
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/${{ secrets.DOCKERHUB_APPNAME }}:alpine
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/sabnzbd:alpine
