@@ -2,7 +2,7 @@
 [![dockerbuilds](https://github.com/digrouz/docker-sabnzbd/actions/workflows/dockerhub.yml/badge.svg)](https://github.com/digrouz/docker-sabnzbd/actions/workflows/dockerhub.yml)
 ![Docker Pulls](https://img.shields.io/docker/pulls/digrouz/sabnzbd)
 
-# docker-alp-sabnzbd
+# docker-sabnzbd
 
 Install sabnzbd into an Alpine container
 
