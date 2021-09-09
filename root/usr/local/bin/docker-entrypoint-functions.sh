@@ -39,10 +39,20 @@ AutoUpgrade(){
         apt-get -y clean
         apt-get -y autoremove
         rm -rf /var/lib/apt/lists/*
-      elif [ "${OS}" == "centos" ]; then
-        yum upgrade -y
-        yum clean all
-        rm -rf /var/cache/yum/*
+      elif [ "${OS}" == "rhel" ]; then
+        if [ -x "$(command -v dnf)" ]; then
+          dnf upgrade -y
+          dnf clean all
+        elif [ -x "$(command -v yum)" ]; then
+          yum upgrade -y
+          yum clean all
+        fi
+        if [ -d /var/cache/yum ];then
+          rm -rf /var/cache/yum/*
+        fi
+        if [ -d /var/cache/dnf ];then
+          rm -rf /var/cache/dnf/*
+        fi
       fi
     else
       DockLog "AutoUpgrade is not enabled."
@@ -147,7 +157,7 @@ ConfigureUser () {
       find / -group "${OLDGID}" -exec chgrp ${MYUSER} {} \; &> /dev/null
       if [ "${OLDHOME}" == "/home/${MYUSER}" ]; then
         chown -R :"${MYUSER}" "${OLDHOME}"
-        chmod -R ga-rwx "${OLDHOME}"
+        chmod -R go-rwx "${OLDHOME}"
       fi
       DockLog "... done!"
     fi
