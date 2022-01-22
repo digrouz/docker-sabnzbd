@@ -80,7 +80,9 @@ RUN set -x && \
     curl -SsL https://www.rarlab.com/rar/unrarsrc-${UNRAR_VERSION}.tar.gz -o /tmp/unrar.tar.gz && \ 
     cd /tmp && \
     tar xzf /tmp/unrar.tar.gz && \
-    ls -l && \
+    cd unrar && \
+    make -f makefile && \
+    install -v -m755 unrar /usr/bin && \
     mkdir /docker-entrypoint.d && \
     chmod +x /usr/local/bin/docker-entrypoint.sh && \
     ln -snf /usr/local/bin/docker-entrypoint.sh /docker-entrypoint.sh && \
