@@ -59,7 +59,7 @@ RUN set -x && \
       su-exec \
       git \
     && \
-    pip3 --no-cache-dir install --upgrade setuptools pip && \
+    pip3 --no-cache-dir install --upgrade setuptools && \
     curl -SsL https://github.com/sabnzbd/sabnzbd/releases/download/${SABNZBD_VERSION}/SABnzbd-${SABNZBD_VERSION}-src.tar.gz -o /tmp/SABnzbd.tar.gz && \
     tar xzf /tmp/SABnzbd.tar.gz -C /opt && \
     mv /opt/SABnzbd-${SABNZBD_VERSION} /opt/sabnzbd && \
