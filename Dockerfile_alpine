@@ -77,7 +77,10 @@ RUN set -x && \
     make install && \
     cd / && \
     rm -rf /tmp/par2cmdline /tmp/par2cmdline-mt && \
-    curl -SsL https://www.rarlab.com/rar/unrarsrc-${UNRAR_VERSION}.tar.gz && \ 
+    curl -SsL https://www.rarlab.com/rar/unrarsrc-${UNRAR_VERSION}.tar.gz -o /tmp/unrar.tar.gz && \ 
+    cd /tmp && \
+    tar xzf /tmp/unrar.tar.gz && \
+    ls -l && \
     mkdir /docker-entrypoint.d && \
     chmod +x /usr/local/bin/docker-entrypoint.sh && \
     ln -snf /usr/local/bin/docker-entrypoint.sh /docker-entrypoint.sh && \
