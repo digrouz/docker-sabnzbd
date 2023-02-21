@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 
-PAR2_URL="https://api.github.com/repos/Parchive/par2cmdline/tags"
+PAR2_URL="https://api.github.com/repos/Parchive/par2cmdline/releases"
 
-LAST_VERSION=$(curl -SsL ${PAR2_URL} | jq .[0].name -r )
+FULL_LAST_VERSION=$(curl -SsL ${PAR2_URL} | \
+              jq -r -c '.[] | select( .prerelease == false ) | .tag_name' |\
+              head -1 \
+              )
+LAST_VERSION="${FULL_LAST_VERSION:1}"
 
 sed -i -e "s|PAR2CMDLINE_VERSION='.*'|PAR2CMDLINE_VERSION='${LAST_VERSION}'|" Dockerfile*
 
