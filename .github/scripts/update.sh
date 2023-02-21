@@ -1,8 +1,12 @@
 #!/usr/bin/env bash
 
-SABNZBD_URL="https://api.github.com/repos/sabnzbd/sabnzbd/tags"
+SABNZBD_URL="https://api.github.com/repos/sabnzbd/sabnzbd/releases"
 
-LAST_VERSION=$(curl -SsL ${SABNZBD_URL} | jq .[0].name -r )
+FULL_LAST_VERSION=$(curl -SsL ${SABNZBD_URL} | \
+              jq -r -c '.[] | select( .prerelease == false ) | .tag_name' |\
+              head -1 \
+              )
+LAST_VERSION="${FULL_LAST_VERSION}"
 
 sed -i -e "s|SABNZBD_VERSION='.*'|SABNZBD_VERSION='${LAST_VERSION}'|" Dockerfile*
 
