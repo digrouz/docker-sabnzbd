@@ -1,7 +1,7 @@
 FROM alpine:3.17.2
 
 ARG SABNZBD_VERSION='4.0.0Alpha1'
-ARG PAR2CMDLINE_VERSION='0.8.1'
+ARG PAR2CMDLINE_VERSION='v0.8.1'
 ARG UNRAR_VERSION='6.1.3'
 
 LABEL maintainer "DI GREGORIO Nicolas <nicolas.digregorio@gmail.com>"
