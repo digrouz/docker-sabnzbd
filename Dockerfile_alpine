@@ -35,7 +35,6 @@ RUN set -x && \
       libxslt-dev\
     && \
     apk add --no-cache --virtual=run-deps \
-      bash \
       ca-certificates \
       python3 \ 
       py3-six \
@@ -46,8 +45,6 @@ RUN set -x && \
       p7zip \
       py3-pip \
       openssl \
-      su-exec \
-      git \
     && \
     pip3 --no-cache-dir install --upgrade setuptools pip wheel && \
     curl -SsL https://github.com/sabnzbd/sabnzbd/releases/download/${SABNZBD_VERSION}/SABnzbd-${SABNZBD_VERSION}-src.tar.gz -o /tmp/SABnzbd.tar.gz && \
