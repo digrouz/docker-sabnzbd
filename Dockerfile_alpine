@@ -87,10 +87,3 @@ VOLUME ["/downloads","/config","/incomplete-downloads"]
 
 ### Expose ports
 EXPOSE 8080 9090
-
-### Running User: not used, managed by docker-entrypoint.sh
-#USER sabnzbd
-
-### Start Sabnzbd
-ENTRYPOINT ["/docker-entrypoint.sh"]
-CMD ["sabnzbd"]
