@@ -14,7 +14,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@main
       - name: configure git
         run: |
           git config --global user.email "nicolas.digregorio@gmail.com"
@@ -27,3 +27,7 @@ jobs:
         run: |
           echo "Run update-par2cmdline.sh"
           bash .github/scripts/update-par2cmdline.sh
+      - name: run update-unrar.sh
+        run: |
+          echo "Run update-unrar.sh"
+          bash .github/scripts/update-unrar.sh
