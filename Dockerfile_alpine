@@ -24,6 +24,7 @@ RUN set -x && \
       automake \
       autoconf \
       gcc \
+      git \
       g++ \
       python3-dev \
       openssl-dev \
