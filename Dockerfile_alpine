@@ -1,4 +1,4 @@
-FROM alpine:3.17.2
+FROM digrouz/alpine-s6:latest
 
 ARG SABNZBD_VERSION='3.7.2'
 ARG PAR2CMDLINE_VERSION='v0.8.1'
@@ -9,10 +9,6 @@ LABEL maintainer "DI GREGORIO Nicolas <nicolas.digregorio@gmail.com>"
 ### Environment variables
 ENV LANG='en_US.UTF-8' \
     LANGUAGE='en_US.UTF-8' \
-    GIT_BRANCH='master' \
-    APPUSER='sabnzbd' \
-    APPUID='10012' \
-    APPGID='10012' \
     SABNZBD_VERSION="${SABNZBD_VERSION}" \
     PAR2CMDLINE_VERSION="${PAR2CMDLINE_VERSION}" \
     UNRAR_VERSION="${UNRAR_VERSION}"
@@ -22,12 +18,6 @@ COPY root/ /
 
 ### Install Application
 RUN set -x && \
-    chmod 1777 /tmp && \
-    . /usr/local/bin/docker-entrypoint-functions.sh && \
-    MYUSER=${APPUSER} && \
-    MYUID=${APPUID} && \
-    MYGID=${APPGID} && \
-    ConfigureUser && \
     apk --no-cache upgrade && \
     apk add --no-cache --virtual=build-deps \
       make \
@@ -83,17 +73,17 @@ RUN set -x && \
     cd unrar && \
     make -f makefile && \
     install -v -m755 unrar /usr/bin && \
-    mkdir /docker-entrypoint.d && \
-    chmod +x /usr/local/bin/docker-entrypoint.sh && \
-    ln -snf /usr/local/bin/docker-entrypoint.sh /docker-entrypoint.sh && \
     apk del --no-cache --purge \
-      build-deps  && \
+      build-deps  \
+    && \
+    chown -R appuser:appuser /opt/sabnzbd && \
+    chmod -R g+w /opt/sabnzbd && \
     rm -rf /opt/sabnzbd/.git* \
            /tmp/* \
            /var/cache/apk/*  \
            /var/tmp/* \
            ${HOME}/.cache \
-	       ${HOME}/.cargo
+	         ${HOME}/.cargo
 
 ### Volume
 VOLUME ["/downloads","/config","/incomplete-downloads"]
