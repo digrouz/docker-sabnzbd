@@ -2,7 +2,7 @@ FROM digrouz/alpine-s6:latest
 
 ARG SABNZBD_VERSION='4.0.2'
 ARG PAR2CMDLINE_VERSION='v0.8.1'
-ARG UNRAR_VERSION='6.2.8'
+ARG UNRAR_VERSION='6.2.6'
 
 LABEL maintainer "DI GREGORIO Nicolas <nicolas.digregorio@gmail.com>"
 
