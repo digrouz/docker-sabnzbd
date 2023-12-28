@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-PAR2_URL="https://api.github.com/repos/Parchive/par2cmdline/releases"
+PAR2_URL="https://api.github.com/repos/animetosho/par2cmdline-turbo/releases"
 
 FULL_LAST_VERSION=$(curl -SsL ${PAR2_URL} | \
               jq -r -c '.[] | select( .prerelease == false ) | .tag_name' |\

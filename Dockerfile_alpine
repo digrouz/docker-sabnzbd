@@ -1,7 +1,7 @@
 FROM digrouz/alpine-s6:latest
 
 ARG SABNZBD_VERSION='4.1.0'
-ARG PAR2CMDLINE_VERSION='v0.8.1'
+ARG PAR2CMDLINE_VERSION='v1.1.0'
 ARG UNRAR_VERSION='6.2.12'
 
 LABEL maintainer "DI GREGORIO Nicolas <nicolas.digregorio@gmail.com>"
@@ -55,8 +55,8 @@ RUN set -x && \
     pip3 --no-cache-dir install --upgrade -r /opt/sabnzbd/requirements.txt && \
     python3 tools/make_mo.py && \
     ln -s /config /opt/sabnzbd/.sabnzbd && \
-    git clone --depth 1 --branch ${PAR2CMDLINE_VERSION} https://github.com/Parchive/par2cmdline.git /tmp/par2cmdline-mt && \
-    cd /tmp/par2cmdline-mt && \
+    git clone --depth 1 --branch ${PAR2CMDLINE_VERSION} https://github.com/animetosho/par2cmdline-turbo.git /tmp/par2cmdline-turbo && \
+    cd /tmp/par2cmdline-turbo && \
     aclocal && \
     automake --add-missing && \
     autoconf && \
