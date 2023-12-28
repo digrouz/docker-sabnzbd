@@ -20,40 +20,31 @@ COPY root/ /
 RUN set -x && \
     apk --no-cache upgrade && \
     apk add --no-cache --virtual=build-deps \
-      make \
       automake \
       autoconf \
-      gcc \
-      git \
-      g++ \
-      python3-dev \
-      openssl-dev \
-      musl-dev \
+      build-base \
       libffi-dev \
-      curl \
-      cargo \
-      libxml2-dev\
-      libxslt-dev\
+      openssl-dev \
+      python3-dev \
     && \
     apk add --no-cache --virtual=run-deps \
       ca-certificates \
-      libgomp \
-      libxml2 \
-      libxslt \
-      openssl \
       p7zip \
       python3 \ 
-      py3-chardet \
-      py3-pip \
-      py3-setuptools \
-      py3-six \
-      py3-wheel \
     && \
     curl -SsL https://github.com/sabnzbd/sabnzbd/releases/download/${SABNZBD_VERSION}/SABnzbd-${SABNZBD_VERSION}-src.tar.gz -o /tmp/SABnzbd.tar.gz && \
     tar xzf /tmp/SABnzbd.tar.gz -C /opt && \
-    mv /opt/SABnzbd-${SABNZBD_VERSION} /opt/sabnzbd && \
+    mv /opt/SABnzbd-${SABNZBD_VERSION} /tmp/sabnzbd && \
+    python3 -m venv /opt/sabnzbd && \
+    pip3 --no-cache-dir install --upgrade \
+      pip \
+      setuptools \
+      wheel \
+    && \
     cd /opt/sabnzbd && \
-    pip3 --no-cache-dir install --upgrade -r /opt/sabnzbd/requirements.txt && \
+    pip3 --no-cache-dir install --upgrade  \
+      -r /opt/sabnzbd/requirements.txt \
+    && \
     python3 tools/make_mo.py && \
     ln -s /config /opt/sabnzbd/.sabnzbd && \
     git clone --depth 1 --branch ${PAR2CMDLINE_VERSION} https://github.com/animetosho/par2cmdline-turbo.git /tmp/par2cmdline-turbo && \
