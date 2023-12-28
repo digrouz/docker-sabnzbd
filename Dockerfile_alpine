@@ -36,11 +36,10 @@ RUN set -x && \
     && \
     curl -SsL https://github.com/sabnzbd/sabnzbd/releases/download/${SABNZBD_VERSION}/SABnzbd-${SABNZBD_VERSION}-src.tar.gz -o /tmp/SABnzbd.tar.gz && \
     tar xzf /tmp/SABnzbd.tar.gz -C /opt && \
-    mv /opt/SABnzbd-${SABNZBD_VERSION} /tmp/sabnzbd && \
-    python3 -m venv /opt/sabnzbd && \
+    mv /opt/SABnzbd-${SABNZBD_VERSION} /opt/sabnzbd && \
     cd /opt/sabnzbd && \
-    ls -l /opt/sabnzbd && \
-    . /opt/sabnzbd/bin/activate && \
+    python3 -m venv /opt/sabvenv && \
+    . /opt/sabvenv/bin/activate && \
     pip3 --no-cache-dir install --upgrade \
       pip \
       setuptools \
