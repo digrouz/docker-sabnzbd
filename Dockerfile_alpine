@@ -37,17 +37,18 @@ RUN set -x && \
     && \
     apk add --no-cache --virtual=run-deps \
       ca-certificates \
-      python3 \ 
-      py3-six \
-      py3-chardet \
+      libgomp \
       libxml2 \
       libxslt \
-      libgomp \
-      p7zip \
-      py3-pip \
       openssl \
+      p7zip \
+      python3 \ 
+      py3-chardet \
+      py3-pip \
+      py3-setuptools \
+      py3-six \
+      py3-wheel \
     && \
-    pip3 --no-cache-dir install --upgrade setuptools pip wheel && \
     curl -SsL https://github.com/sabnzbd/sabnzbd/releases/download/${SABNZBD_VERSION}/SABnzbd-${SABNZBD_VERSION}-src.tar.gz -o /tmp/SABnzbd.tar.gz && \
     tar xzf /tmp/SABnzbd.tar.gz -C /opt && \
     mv /opt/SABnzbd-${SABNZBD_VERSION} /opt/sabnzbd && \
