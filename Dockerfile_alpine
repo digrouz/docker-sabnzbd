@@ -44,6 +44,8 @@ RUN set -x && \
       wheel \
     && \
     cd /opt/sabnzbd && \
+    ls -l /opt/sabnzbd && \
+    . /opt/sabnzbd/bin/activate && \
     pip3 --no-cache-dir install --upgrade  \
       -r /opt/sabnzbd/requirements.txt \
     && \
