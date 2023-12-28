@@ -46,7 +46,7 @@ RUN set -x && \
       wheel \
     && \
     pip3 --no-cache-dir install --upgrade  \
-      -r /tmp/sabnzbd/requirements.txt \
+      -r /opt/sabnzbd/requirements.txt \
     && \
     python3 tools/make_mo.py && \
     ln -s /config /opt/sabnzbd/.sabnzbd && \
