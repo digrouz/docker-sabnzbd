@@ -38,14 +38,14 @@ RUN set -x && \
     tar xzf /tmp/SABnzbd.tar.gz -C /opt && \
     mv /opt/SABnzbd-${SABNZBD_VERSION} /tmp/sabnzbd && \
     python3 -m venv /opt/sabnzbd && \
+    cd /opt/sabnzbd && \
+    ls -l /opt/sabnzbd && \
+    . /opt/sabnzbd/bin/activate && \
     pip3 --no-cache-dir install --upgrade \
       pip \
       setuptools \
       wheel \
     && \
-    cd /opt/sabnzbd && \
-    ls -l /opt/sabnzbd && \
-    . /opt/sabnzbd/bin/activate && \
     pip3 --no-cache-dir install --upgrade  \
       -r /opt/sabnzbd/requirements.txt \
     && \
