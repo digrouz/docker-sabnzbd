@@ -26,12 +26,14 @@ RUN set -x && \
       curl \
       git \
       libffi-dev \
+      libgomp-dev \
       openssl-dev \
       py3-pip \
       python3-dev \
     && \
     apk add --no-cache --virtual=run-deps \
       ca-certificates \
+      libgomp \
       p7zip \
       python3 \ 
     && \
