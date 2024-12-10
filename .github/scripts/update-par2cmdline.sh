@@ -7,7 +7,7 @@ FULL_LAST_VERSION=$(curl -SsL ${PAR2_URL} | \
               head -1 \
               )
 LAST_VERSION="${FULL_LAST_VERSION}"
-LAST_VERSION="master"
+LAST_VERSION="turbo"
 
 if [ "${LAST_VERSION}" ]; then
   sed -i -e "s|PAR2CMDLINE_VERSION='.*'|PAR2CMDLINE_VERSION='${LAST_VERSION}'|" Dockerfile*
