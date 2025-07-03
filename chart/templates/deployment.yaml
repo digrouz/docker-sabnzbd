@@ -47,15 +47,23 @@ spec:
               value: "{{ .Values.smtp.domain }}"
       volumes:
         - name: sabnzbd-config
-          {{- if .Values.persistence.enabled }}
+          {{- if .Values.persistence.config.enabled }}
           persistentVolumeClaim:
             claimName: {{ include "sabnzbd.fullname" . }}-config-pvc
           {{- else }}
           emptyDir: { }
           {{- end }}
         - name: sabnzbd-downloads
-          hostPath:
-            path: /dpool/DOWNLOADS/completed
+          {{- if .Values.persistence.downloads.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ include "sabnzbd.fullname" . }}-downloads-pvc
+          {{- else }}
+          emptyDir: { }
+          {{- end }}
         - name: sabnzbd-incomplete-downloads
-          hostPath:
-            path: /dpool/DOWNLOADS/incomplete/sabnzbd
+          {{- if .Values.persistence.incomplete.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ include "sabnzbd.fullname" . }}-incomplete-pvc
+          {{- else }}
+          emptyDir: { }
+          {{- end }}

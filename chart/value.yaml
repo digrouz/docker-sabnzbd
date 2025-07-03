@@ -90,19 +90,54 @@ ingress:
 ## @section Storage persistence Configuration
 ##
 persistence:
-  ## @param persistence.config.enabled Enable persistence for sabnzbd config
-  ## If enabled, the config will be stored in a persistent volume
-  ## If disabled, the config will be stored in a temporary volume
-  enabled: true
-  ## @param persistence.config.storageClass Storage class for sabnzbd config
-  ## If not set, the default storage class will be used
-  storageClass: default
-  ## @param persistence.config.existingClaim Existing persistent volume claim for sabnzbd config
-  ## If set, the config will be stored in the existing persistent volume claim
-  existingClaim: ""
-  ## @param persistence.config.accessMode Access mode for sabnzbd config
-  ## If not set, the default access mode will be used
-  accessMode: ReadWriteOnce
-  ## @param persistence.config.size Size of the persistent volume for sabnzbd config
-  ## If not set, the default size will be used
-  size: 256Mi
+  config:
+    ## @param persistence.config.enabled Enable persistence for sabnzbd config
+    ## If enabled, the config will be stored in a persistent volume
+    ## If disabled, the config will be stored in a temporary volume
+    enabled: true
+    ## @param persistence.config.storageClass Storage class for sabnzbd config
+    ## If not set, the default storage class will be used
+    storageClass: default
+    ## @param persistence.config.existingClaim Existing persistent volume claim for sabnzbd config
+    ## If set, the config will be stored in the existing persistent volume claim
+    existingClaim: ""
+    ## @param persistence.config.accessMode Access mode for sabnzbd config
+    ## If not set, the default access mode will be used
+    accessMode: ReadWriteOnce
+    ## @param persistence.config.size Size of the persistent volume for sabnzbd config
+    ## If not set, the default size will be used
+    size: 256Mi
+  downloads:
+    ## @param persistence.config.enabled Enable persistence for sabnzbd config
+    ## If enabled, the config will be stored in a persistent volume
+    ## If disabled, the config will be stored in a temporary volume
+    enabled: true
+    ## @param persistence.config.storageClass Storage class for sabnzbd config
+    ## If not set, the default storage class will be used
+    storageClass: default
+    ## @param persistence.config.existingClaim Existing persistent volume claim for sabnzbd config
+    ## If set, the config will be stored in the existing persistent volume claim
+    existingClaim: ""
+    ## @param persistence.config.accessMode Access mode for sabnzbd config
+    ## If not set, the default access mode will be used
+    accessMode: ReadWriteOnce
+    ## @param persistence.config.size Size of the persistent volume for sabnzbd config
+    ## If not set, the default size will be used
+    size: 256Mi
+  incomplete:
+    ## @param persistence.incomplete.enabled Enable persistence for sabnzbd incomplete downloads
+    ## If enabled, the incomplete downloads will be stored in a persistent volume
+    ## If disabled, the incomplete downloads will be stored in a temporary volume
+    enabled: true
+    ## @param persistence.incomplete.storageClass Storage class for sabnzbd incomplete downloads
+    ## If not set, the default storage class will be used
+    storageClass: default
+    ## @param persistence.incomplete.existingClaim Existing persistent volume claim for sabnzbd incomplete downloads
+    ## If set, the incomplete downloads will be stored in the existing persistent volume claim
+    existingClaim: ""
+    ## @param persistence.config.accessMode Access mode for sabnzbd incomplete downloads
+    ## If not set, the default access mode will be used
+    accessMode: ReadWriteOnce
+    ## @param persistence.config.size Size of the persistent volume for sabnzbd incomplete downloads
+    ## If not set, the default size will be used
+    size: 256Mi
