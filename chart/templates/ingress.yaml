@@ -58,7 +58,7 @@ metadata:
   - host: {{ .Values.ingress.api.host }}
     http:
       paths:
-      - path: /api
+      - path: /
         pathType: Prefix
         backend:
           service:
