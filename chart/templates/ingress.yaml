@@ -1,5 +1,5 @@
 ---
-{{ if .Values.ingress.webui.enabled }}
+{{- if .Values.ingress.webui.enabled -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -7,11 +7,12 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     app.kubernetes.io/component: sabnzbd
+  {{- if .Values.ingress.webui.annotations }}
   annotations:
-    {{- if .Values.ingress.webui.annotations }}
     {{- range $key, $value := .Values.ingress.webui.annotations }}
     {{ $key }}: {{ $value }}
     {{- end }}
+  {{- end }}
 spec:
   {{- if .Values.ingress.webui.ingressClassName }}
   ingressClassName: {{ .Values.ingress.webui.ingressClassName }}
@@ -33,9 +34,9 @@ spec:
         - {{ .Values.ingress.webui.host }}
       secretName: {{ .Values.ingress.webui.host }}-tls
   {{- end }}
-{{ end }}
+{{- end -}}
 ---
-{{ if .Values.ingress.api.enabled }}
+{{- if .Values.ingress.api.enabled -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -43,11 +44,12 @@ metadata:
   namespace: {{ .Release.Namespace }}
   labels:
     app.kubernetes.io/component: sabnzbd
+  {{- if .Values.ingress.api.annotations }}
   annotations:
-    {{- if .Values.ingress.api.annotations }}
     {{- range $key, $value := .Values.ingress.api.annotations }}
     {{ $key }}: {{ $value }}
     {{- end }}
+  {{- end }}
   spec:
   {{- if .Values.ingress.api.ingressClassName }}
   ingressClassName: {{ .Values.ingress.api.ingressClassName }}
@@ -69,4 +71,4 @@ metadata:
         - {{ .Values.ingress.api.host }}
       secretName: {{ .Values.ingress.api.host }}-tls
   {{- end }}
-{{ end }}
+{{- end -}}
