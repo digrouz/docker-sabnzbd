@@ -96,7 +96,7 @@ persistence:
   enabled: true
   ## @param persistence.config.storageClass Storage class for sabnzbd config
   ## If not set, the default storage class will be used
-  storageClass: ""
+  storageClass: default
   ## @param persistence.config.existingClaim Existing persistent volume claim for sabnzbd config
   ## If set, the config will be stored in the existing persistent volume claim
   existingClaim: ""
