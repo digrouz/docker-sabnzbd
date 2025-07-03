@@ -34,7 +34,7 @@ spec:
         - {{ .Values.ingress.webui.host }}
       secretName: {{ .Values.ingress.webui.host }}-tls
   {{- end }}
-{{- end -}}
+{{- end }}
 ---
 {{- if .Values.ingress.api.enabled -}}
 apiVersion: networking.k8s.io/v1
