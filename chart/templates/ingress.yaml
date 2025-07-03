@@ -1,5 +1,5 @@
 ---
-{{- if .Values.ingress.webui.enabled -}}
+{{ if .Values.ingress.webui.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -33,9 +33,9 @@ spec:
         - {{ .Values.ingress.webui.host }}
       secretName: {{ .Values.ingress.webui.host }}-tls
   {{- end }}
-{{- end -}}
+{{ end }}
 ---
-{{- if .Values.ingress.api.enabled -}}
+{{ if .Values.ingress.api.enabled }}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -69,4 +69,4 @@ metadata:
         - {{ .Values.ingress.api.host }}
       secretName: {{ .Values.ingress.api.host }}-tls
   {{- end }}
-{{- end -}}
+{{ end }}
