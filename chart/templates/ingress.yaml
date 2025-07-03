@@ -13,9 +13,9 @@ metadata:
     {{ $key }}: {{ $value }}
     {{- end }}
 spec:
-  {{- if .Values.ingress.webui.ingressClassName -}}
+  {{- if .Values.ingress.webui.ingressClassName }}
   ingressClassName: {{ .Values.ingress.webui.ingressClassName }}
-  {{- end -}}
+  {{- end }}
   rules:
   - host: {{ .Values.ingress.webui.host }}
     http:
@@ -27,12 +27,12 @@ spec:
             name: sabnzbd
             port:
               name: webui
-  {{- if .Values.ingress.webui.tls -}}
+  {{- if .Values.ingress.webui.tls }}
   tls:
     - hosts:
         - {{ .Values.ingress.webui.host }}
       secretName: {{ .Values.ingress.webui.host }}-tls
-  {{- end -}}
+  {{- end }}
 {{- end -}}
 ---
 {{- if .Values.ingress.api.enabled -}}
@@ -49,9 +49,9 @@ metadata:
     {{ $key }}: {{ $value }}
     {{- end }}
   spec:
-  {{- if .Values.ingress.api.ingressClassName -}}
+  {{- if .Values.ingress.api.ingressClassName }}
   ingressClassName: {{ .Values.ingress.api.ingressClassName }}
-  {{- end -}}
+  {{- end }}
   rules:
   - host: {{ .Values.ingress.api.host }}
     http:
@@ -63,10 +63,10 @@ metadata:
             name: sabnzbd
             port:
               name: api
-  {{- if .Values.ingress.api.tls -}}
+  {{- if .Values.ingress.api.tls }}
   tls:
     - hosts:
         - {{ .Values.ingress.api.host }}
       secretName: {{ .Values.ingress.api.host }}-tls
-  {{- end -}}
+  {{- end }}
 {{- end -}}
