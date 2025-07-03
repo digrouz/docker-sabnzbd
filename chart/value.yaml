@@ -108,20 +108,20 @@ persistence:
     ## If not set, the default size will be used
     size: 256Mi
   downloads:
-    ## @param persistence.config.enabled Enable persistence for sabnzbd config
-    ## If enabled, the config will be stored in a persistent volume
-    ## If disabled, the config will be stored in a temporary volume
+    ## @param persistence.downloads.enabled Enable persistence for sabnzbd downloads
+    ## If enabled, the downloads will be stored in a persistent volume
+    ## If disabled, the downloads will be stored in a temporary volume
     enabled: true
-    ## @param persistence.config.storageClass Storage class for sabnzbd config
+    ## @param persistence.downloads.storageClass Storage class for sabnzbd downloads
     ## If not set, the default storage class will be used
     storageClass: default
-    ## @param persistence.config.existingClaim Existing persistent volume claim for sabnzbd config
-    ## If set, the config will be stored in the existing persistent volume claim
+    ## @param persistence.downloads.existingClaim Existing persistent volume claim for sabnzbd downloads
+    ## If set, the downloads will be stored in the existing persistent volume claim
     existingClaim: ""
-    ## @param persistence.config.accessMode Access mode for sabnzbd config
+    ## @param persistence.downloads.accessMode Access mode for sabnzbd downloads
     ## If not set, the default access mode will be used
     accessMode: ReadWriteOnce
-    ## @param persistence.config.size Size of the persistent volume for sabnzbd config
+    ## @param persistence.downloads.size Size of the persistent volume for sabnzbd downloads
     ## If not set, the default size will be used
     size: 256Mi
   incomplete:
