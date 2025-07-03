@@ -70,14 +70,14 @@ ingress:
       traefik.ingress.kubernetes.io/router.middlewares: traefik-basic-auth@kubernetescrd, traefik-redirect-http-to-https@kubernetescrd
       cert-manager.io/cluster-issuer: letsencrypt-prod
   api:
-  ## @param ingress.api.enabled Enable ingress for sabnzbd api
+    ## @param ingress.api.enabled Enable ingress for sabnzbd api
+    ##
     enabled: true
     ## @param ingress.webui.ingressClassName Ingress class name for sabnzbd webui ingress
     ##
     ingressClassName: traefik
     ## @param ingress.api.host Host for sabnzbd api ingress
     ##
-  
     host: ""
     ## @param ingress.api.tls Enable TLS for sabnzbd api ingress
     ##

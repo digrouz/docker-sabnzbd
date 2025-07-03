@@ -25,9 +25,9 @@ spec:
         pathType: Prefix
         backend:
           service:
+            name: {{ include "sabnzbd.fullname" . }}-svc
             port:
               name: webui
-            name: {{ include "sabnzbd.fullname" . }}-svc
   {{- if .Values.ingress.webui.tls }}
   tls:
     - hosts:
