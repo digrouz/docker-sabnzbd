@@ -56,6 +56,7 @@ This variable is not mandatory and specifies the timezone to be configured withi
 
 * This container is built using [s6-overlay](https://github.com/just-containers/s6-overlay)
 * The docker entrypoint can upgrade operating system at each startup. To enable this feature, just add `-e AUTOUPGRADE=1` at container creation.
+* An helm chart is available of in the [chart folder](https://github.com/digrouz/docker-sabnzbd/tree/master/chart) with an example [value.yaml](https://github.com/digrouz/docker-sabnzbd/tree/master/chart/value.yaml)
 
 ## Issues
 

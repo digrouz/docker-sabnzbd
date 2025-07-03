@@ -1,0 +1,61 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "sabnzbd.fullname" . }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/component: sabnzbd
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: sabnzbd
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: sabnzbd
+    spec:
+      containers:
+        - name: sabnzbd
+          image: {{ .Values.image.registry }}/{{ .Values.image.repository }}:{{ .Values.image.tag }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - containerPort: 8080
+            - containerPort: 9090
+          volumeMounts:
+            - mountPath: /config
+              name: sabnzbd-config
+            - mountPath: /downloads
+              name: sabnzbd-downloads
+            - mountPath: /incomplete-downloads
+              name: sabnzbd-incomplete-downloads
+          env:
+            - name: GID
+              value: "{{ .Values.service.gid }}"
+            - name: UID
+              value: "{{ .Values.service.uid }}"
+            - name: TZ
+              value: "{{ .Values.service.tz }}"
+            - name: AUTOUPGRADE
+              value: "{{ .Values.service.autoupgrade }}"
+            - name: DOCKRELAY
+              value: "{{ .Values.smtp.host }}"
+            - name: DOCKMAIL
+              value: "{{ .Values.smtp.from }}"
+            - name: DOCKMAILDOMAIN
+              value: "{{ .Values.smtp.domain }}"
+      volumes:
+        - name: sabnzbd-config
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim:
+            claimName: {{ include "sabnzbd.fullname" . }}-config-pvc
+          {{- else }}
+          emptyDir: { }
+          {{- end }}
+        - name: sabnzbd-downloads
+          hostPath:
+            path: /dpool/DOWNLOADS/completed
+        - name: sabnzbd-incomplete-downloads
+          hostPath:
+            path: /dpool/DOWNLOADS/incomplete/sabnzbd

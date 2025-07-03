@@ -1,0 +1,16 @@
+{{- if and .Values.persistence.enabled }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+ name: {{ include "sabnzbd.fullname" . }}-config-pvc
+ namespace: {{ .Release.Namespace }}
+ labels:
+   app.kubernetes.io/component: sabnzbd 
+spec:
+ storageClassName: {{ .Values.persistence.storageClass }}
+ accessModes:
+   - {{ .Values.persistence.accessMode | quote }}
+ resources:
+   requests:
+     storage: {{ .Values.persistence.size | quote }}
+ {{- end }}

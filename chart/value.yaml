@@ -1,0 +1,108 @@
+## @section Kubernetes settings
+##
+image:
+  ## @param image.registry sabnzbd image registry
+  ##
+  registry: docker.io
+  ## @param image.repository sabnzbd image repository
+  ##
+  repository: digrouz/sabnzbd
+  ##
+  ## @param image.tag sabnzbd image tag
+  ## Ref: https://hub.docker.com/r/digrouz/sabnzbd/tags
+  ##
+  tag: "latest"
+  ## @param image.pullPolicy sabnzbd image pull policy
+  ## ref: https://kubernetes.io/docs/user-guide/images/#pre-pulling-images
+  ##
+  pullPolicy: Always
+## @param fullnameOverride String to override the application name.
+##
+fullnameOverride: ""
+## @section Service Configuration
+##
+service:
+  ## @param service.uid user id running sabnzbd
+  ##
+  uid: 12345
+  ## @param service.gid group id running sabnzbd
+  ##
+  gid: 12345
+  ## @param service.autoupgrade apply OS updates inside container at startup
+  ##
+  autoupgrade: 0
+  ## @param service.tz Time Zone
+  ##
+  tz: Europe/Brussels
+## @section SMTP Configuration
+##
+smtp:
+  ## @param smtp.host SMTP host
+  ##
+  host: ""
+  ## @param smtp.from SMTP sender email address
+  ## Example: foo.bar@domain.com
+  ##
+  from: ""
+  ## @param smtp.domain SMTP sender email address
+  ## Example: domain.com
+  ##
+  domain: ""
+## @section ingress Configuration
+##
+ingress:
+  webui:
+    ## @param ingress.webui.enabled Enable ingress for sabnzbd webui
+    ##
+    enabled: true
+    ## @param ingress.webui.ingressClassName Ingress class name for sabnzbd webui ingress
+    ##
+    ingressClassName: traefik
+    ## @param ingress.webui.host Host for sabnzbd webui ingress
+    ##
+    host: ""
+    ## @param ingress.webui.tls Enable TLS for sabnzbd webui ingress
+    ##
+    tls: true
+    ## @param ingress.webui.annotations Annotations for sabnzbd webui ingress
+    ##
+    annotations:
+      traefik.ingress.kubernetes.io/router.middlewares: traefik-basic-auth@kubernetescrd, traefik-redirect-http-to-https@kubernetescrd
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+  api:
+  ## @param ingress.api.enabled Enable ingress for sabnzbd api
+    enabled: true
+    ## @param ingress.webui.ingressClassName Ingress class name for sabnzbd webui ingress
+    ##
+    ingressClassName: traefik
+    ## @param ingress.api.host Host for sabnzbd api ingress
+    ##
+  
+    host: ""
+    ## @param ingress.api.tls Enable TLS for sabnzbd api ingress
+    ##
+    tls: true
+    ## @param ingress.api.annotations Annotations for sabnzbd api ingress
+    ##
+    annotations:
+      traefik.ingress.kubernetes.io/router.middlewares: traefik-basic-auth@kubernetescrd, traefik-redirect-http-to-https@kubernetescrd
+      cert-manager.io/cluster-issuer: letsencrypt-prod
+## @section Storage persistence Configuration
+##
+persistence:
+  ## @param persistence.config.enabled Enable persistence for sabnzbd config
+  ## If enabled, the config will be stored in a persistent volume
+  ## If disabled, the config will be stored in a temporary volume
+  enabled: true
+  ## @param persistence.config.storageClass Storage class for sabnzbd config
+  ## If not set, the default storage class will be used
+  storageClass: ""
+  ## @param persistence.config.existingClaim Existing persistent volume claim for sabnzbd config
+  ## If set, the config will be stored in the existing persistent volume claim
+  existingClaim: ""
+  ## @param persistence.config.accessMode Access mode for sabnzbd config
+  ## If not set, the default access mode will be used
+  accessMode: ReadWriteOnce
+  ## @param persistence.config.size Size of the persistent volume for sabnzbd config
+  ## If not set, the default size will be used
+  size: 256Mi

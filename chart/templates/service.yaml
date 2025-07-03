@@ -1,0 +1,18 @@
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: {{ include "sabnzbd.fullname" . }}-svc
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/component: sabnzbd
+spec:
+  ports:
+  - port: 8080
+    name: webui
+    protocol: TCP
+  - port: 9090
+    name: api
+    protocol: TCP
+  selector:
+    app.kubernetes.io/component: sabnzbd
