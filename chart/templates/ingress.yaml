@@ -25,7 +25,7 @@ spec:
         pathType: Prefix
         backend:
           service:
-            name: sabnzbd
+            name: {{ include "sabnzbd.fullname" . }}-svc
             port:
               name: webui
   {{- if .Values.ingress.webui.tls }}
@@ -62,7 +62,7 @@ metadata:
         pathType: Prefix
         backend:
           service:
-            name: sabnzbd
+            name: {{ include "sabnzbd.fullname" . }}-svc
             port:
               name: api
   {{- if .Values.ingress.api.tls }}
