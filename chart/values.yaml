@@ -91,10 +91,11 @@ ingress:
 ##
 persistence:
   config:
-    ## @param persistence.config.enabled Enable persistence for sabnzbd config
-    ## If enabled, the config will be stored in a persistent volume
-    ## If disabled, the config will be stored in a temporary volume
-    enabled: true
+    ## @param persistence.config.type Type of persistence for sabnzbd config
+    ## If set to pvc, a persistent volume claim will be created
+    ## If set to nfs, a network file system will be used
+    ##
+    type: pvc
     ## @param persistence.config.storageClass Storage class for sabnzbd config
     ## If not set, the default storage class will be used
     storageClass: default
@@ -108,10 +109,11 @@ persistence:
     ## If not set, the default size will be used
     size: 256Mi
   downloads:
-    ## @param persistence.downloads.enabled Enable persistence for sabnzbd downloads
-    ## If enabled, the downloads will be stored in a persistent volume
-    ## If disabled, the downloads will be stored in a temporary volume
-    enabled: true
+    ## @param persistence.downloads.type Type of persistence for sabnzbd downloads
+    ## If set to pvc, a persistent volume claim will be created
+    ## If set to nfs, a network file system will be used
+    ##
+    type: pvc
     ## @param persistence.downloads.storageClass Storage class for sabnzbd downloads
     ## If not set, the default storage class will be used
     storageClass: default
@@ -125,10 +127,11 @@ persistence:
     ## If not set, the default size will be used
     size: 256Mi
   incomplete:
-    ## @param persistence.incomplete.enabled Enable persistence for sabnzbd incomplete downloads
-    ## If enabled, the incomplete downloads will be stored in a persistent volume
-    ## If disabled, the incomplete downloads will be stored in a temporary volume
-    enabled: true
+    ## @param persistence.incomplete.type Type of persistence for sabnzbd incomplete downloads
+    ## If set to pvc, a persistent volume claim will be created
+    ## If set to nfs, a network file system will be used
+    ##
+    type: pvc
     ## @param persistence.incomplete.storageClass Storage class for sabnzbd incomplete downloads
     ## If not set, the default storage class will be used
     storageClass: default

@@ -1,5 +1,5 @@
 ---
-{{- if .Values.persistence.config.enabled }}
+{{- if eq .Values.persistence.config.type "pvc" }}
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
@@ -14,4 +14,38 @@ spec:
   resources:
     requests:
       storage: {{ .Values.persistence.config.size | quote }}
+{{- end }}
+---
+{{- if eq .Values.persistence.downloads.type "pvc" }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ include "sabnzbd.fullname" . }}-downloads-pvc
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/component: sabnzbd 
+spec:
+  storageClassName: {{ .Values.persistence.downloads.storageClass }}
+  accessModes:
+    - {{ .Values.persistence.downloads.accessMode | quote }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.downloads.size | quote }}
+{{- end }}
+---
+{{- if eq .Values.persistence.incomplete.type "pvc" }}
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: {{ include "sabnzbd.fullname" . }}-incomplete-pvc
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app.kubernetes.io/component: sabnzbd 
+spec:
+  storageClassName: {{ .Values.persistence.incomplete.storageClass }}
+  accessModes:
+    - {{ .Values.persistence.incomplete.accessMode | quote }}
+  resources:
+    requests:
+      storage: {{ .Values.persistence.incomplete.size | quote }}
 {{- end }}

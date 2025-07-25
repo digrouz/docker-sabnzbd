@@ -47,23 +47,35 @@ spec:
               value: "{{ .Values.smtp.domain }}"
       volumes:
         - name: sabnzbd-config
-          {{- if .Values.persistence.config.enabled }}
+          {{- if eq .Values.persistence.config.type "pvc" }}
           persistentVolumeClaim:
-            claimName: {{ include "sabnzbd.fullname" . }}-config-pvc
+            claimName: {{ .Release.Name }}-config-pvc
+          {{- else if eq .Values.persistence.config.type "nfs" }}
+          nfs:
+            server: {{ .Values.persistence.config.nfs.server }}
+            path: {{ .Values.persistence.config.nfs.path }}
           {{- else }}
           emptyDir: { }
           {{- end }}
         - name: sabnzbd-downloads
-          {{- if .Values.persistence.downloads.enabled }}
+          {{- if eq .Values.persistence.downloads.type "pvc" }}
           persistentVolumeClaim:
-            claimName: {{ include "sabnzbd.fullname" . }}-downloads-pvc
+            claimName: {{ .Release.Name }}-downloads-pvc
+          {{- else if eq .Values.persistence.downloads.type "nfs" }}
+          nfs:
+            server: {{ .Values.persistence.downloads.nfs.server }}
+            path: {{ .Values.persistence.downloads.nfs.path }}
           {{- else }}
           emptyDir: { }
           {{- end }}
         - name: sabnzbd-incomplete-downloads
-          {{- if .Values.persistence.incomplete.enabled }}
+          {{- if eq .Values.persistence.incomplete.type "pvc" }}
           persistentVolumeClaim:
-            claimName: {{ include "sabnzbd.fullname" . }}-incomplete-pvc
+            claimName: {{ .Release.Name }}-incomplete-pvc
+          {{- else if eq .Values.persistence.incomplete.type "nfs" }}
+          nfs:
+            server: {{ .Values.persistence.incomplete.nfs.server }}
+            path: {{ .Values.persistence.incomplete.nfs.path }}
           {{- else }}
           emptyDir: { }
           {{- end }}
